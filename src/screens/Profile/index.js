@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, View, ActivityIndicator, Image } from 'react-native'
 
-const MyRecipies = () => {
-	return <Text>Recipes</Text>
+const Profile = () => {
+	return <Text>Me!</Text>
 }
 
-export default MyRecipies
+export default Profile

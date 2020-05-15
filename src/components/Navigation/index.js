@@ -3,26 +3,15 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
+import { MaterialIcons } from '@expo/vector-icons'
+import { Button } from 'react-native'
 import MyRecipies from '../../screens/MyRecipies'
-import { TabBarIndicator } from 'react-native-tab-view'
+import LogInScreen from '../../screens/LogInScreen'
+import SignUpScreen from '../../screens/SignUpScreen'
+import Profile from '../../screens/Profile'
 
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
-
-function getHeaderTitle(route) {
-	const routeName = route.state
-		? route.state.routes[route.state.index].name
-		: route.params?.screen || 'Home'
-
-	switch (routeName) {
-		case 'Home':
-			return 'Home'
-		case 'Find Recipies':
-			return 'Find Recipies'
-		case 'Saved Recipies':
-			return 'Saved Recipies'
-	}
-}
 
 const MainTabNavigator = () => {
 	return (
@@ -51,17 +40,50 @@ const MainTabNavigator = () => {
 	)
 }
 
-const MainStackNavigator = () => {
+const MainStackNavigator = ({ navigation }) => {
+	const isSignedIn = true
+
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-				<Stack.Screen
-					name="Find Recipies"
-					component={MainTabNavigator}
-					options={({ route }) => ({
-						headerTitle: getHeaderTitle(route),
-					})}
-				/>
+				{isSignedIn ? (
+					<>
+						<Stack.Screen
+							name="Home"
+							component={MainTabNavigator}
+							options={{
+								headerLeft: () => (
+									<MaterialIcons
+										name="person-outline"
+										size={24}
+										color="black"
+										// onPress={() => navigation.navigate(Profile)}
+									/>
+								),
+								headerTitle: 'shake N make',
+								headerRight: () => <Button title="Log Out" />,
+							}}
+						/>
+					</>
+				) : (
+					<>
+						<Stack.Screen
+							name="Log In"
+							component={LogInScreen}
+							options={{
+								headerTitle: 'shake N make',
+							}}
+						/>
+						<Stack.Screen
+							name="Sign Up"
+							component={SignUpScreen}
+							options={{
+								headerTitle: 'shake N make',
+								headerBackTitle: 'Log In',
+							}}
+						/>
+					</>
+				)}
 			</Stack.Navigator>
 		</NavigationContainer>
 	)
