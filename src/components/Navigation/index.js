@@ -5,11 +5,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Button, TouchableOpacity } from 'react-native'
-import MyRecipies from '../../screens/MyRecipies'
+import FindRecipies from '../../screens/FindRecipies'
+import SavedRecipies from '../../screens/SavedRecipes'
 import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
 import Profile from '../../screens/Profile'
-import theme from '../../styles'
+import colors from '../../styles'
 
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -17,25 +18,25 @@ const Stack = createStackNavigator()
 const MainTabNavigator = () => {
 	return (
 		<Tab.Navigator
-			barStyle={{ backgroundColor: theme.background }}
-			activeColor={theme.focusText}
-			inactiveColor={theme.unfocusedText}
+			barStyle={{ backgroundColor: colors.background }}
+			activeColor={colors.focusText}
+			inactiveColor={colors.unfocusedText}
 		>
 			<Tab.Screen
-				name="Find Recipes"
-				component={MyRecipies}
+				name="Find Recipies"
+				component={FindRecipies}
 				options={{
 					tabBarIcon: ({ color }) => (
-						<Ionicons name="ios-search" color={color} size={'20'} />
+						<Ionicons name="ios-search" color={color} size={20} />
 					),
 				}}
 			/>
 			<Tab.Screen
 				name="Saved Recipies"
-				component={MyRecipies}
+				component={SavedRecipies}
 				options={{
 					tabBarIcon: ({ color }) => (
-						<Ionicons name="ios-bookmark" color={color} size={'20'} />
+						<Ionicons name="ios-bookmark" color={color} size={20} />
 					),
 				}}
 			/>
@@ -50,10 +51,10 @@ const MainStackNavigator = () => {
 			<Stack.Navigator
 				screenOptions={{
 					headerStyle: {
-						backgroundColor: theme.background,
+						backgroundColor: colors.background,
 					},
 					headerTitle: 'shake N make',
-					headerTintColor: theme.focusText,
+					headerTintColor: colors.focusText,
 					headerTitleStyle: {
 						fontWeight: 'bold',
 					},
@@ -77,7 +78,7 @@ const MainStackNavigator = () => {
 									</TouchableOpacity>
 								),
 								headerRight: () => (
-									<Button title="Log Out" color={theme.focusText} />
+									<Button title="Log Out" color={colors.focusText} />
 								),
 							})}
 						/>

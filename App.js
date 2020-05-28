@@ -1,21 +1,27 @@
 import * as React from 'react'
+import { Provider } from 'react-redux'
+import store from './src/store'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { Text, View, ActivityIndicator, Image } from 'react-native'
-import { ThemeProvider, Button } from 'react-native-elements'
 import MainStackNavigator from './src/components/Navigation'
+import colors from './src/styles'
 
 const theme = {
+	...DefaultTheme,
+	roundness: 2,
 	colors: {
-		primary: 'green',
-	},
-	Button: {
-		width: '80vw',
+		...DefaultTheme.colors,
+		primary: colors.focusText,
+		accent: colors.background,
 	},
 }
 
 export default function App() {
 	return (
-		<ThemeProvider theme={theme}>
-			<MainStackNavigator />
-		</ThemeProvider>
+		<Provider store={store}>
+			<PaperProvider theme={theme}>
+				<MainStackNavigator />
+			</PaperProvider>
+		</Provider>
 	)
 }
