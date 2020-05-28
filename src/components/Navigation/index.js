@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
-import { Button } from 'react-native'
+import { Button, TouchableOpacity } from 'react-native'
 import MyRecipies from '../../screens/MyRecipies'
 import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
@@ -40,9 +40,8 @@ const MainTabNavigator = () => {
 	)
 }
 
-const MainStackNavigator = ({ navigation }) => {
+const MainStackNavigator = () => {
 	const isSignedIn = true
-
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
@@ -51,17 +50,28 @@ const MainStackNavigator = ({ navigation }) => {
 						<Stack.Screen
 							name="Home"
 							component={MainTabNavigator}
-							options={{
+							options={({ navigation }) => ({
 								headerLeft: () => (
-									<MaterialIcons
-										name="person-outline"
-										size={24}
-										color="black"
-										// onPress={() => navigation.navigate(Profile)}
-									/>
+									<TouchableOpacity
+										onPress={() => navigation.navigate(Profile)}
+									>
+										<MaterialIcons
+											name="person-outline"
+											size={24}
+											color="black"
+										/>
+									</TouchableOpacity>
 								),
 								headerTitle: 'shake N make',
 								headerRight: () => <Button title="Log Out" />,
+							})}
+						/>
+						<Stack.Screen
+							name="Profile"
+							component={Profile}
+							options={{
+								headerTitle: 'shake N make',
+								headerBackTitle: 'Back',
 							}}
 						/>
 					</>
