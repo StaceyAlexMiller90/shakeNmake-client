@@ -9,19 +9,24 @@ import MyRecipies from '../../screens/MyRecipies'
 import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
 import Profile from '../../screens/Profile'
+import theme from '../../styles'
 
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
 const MainTabNavigator = () => {
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator
+			barStyle={{ backgroundColor: theme.background }}
+			activeColor={theme.focusText}
+			inactiveColor={theme.unfocusedText}
+		>
 			<Tab.Screen
 				name="Find Recipes"
 				component={MyRecipies}
 				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="ios-home" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Ionicons name="ios-search" color={color} size={'20'} />
 					),
 				}}
 			/>
@@ -29,13 +34,11 @@ const MainTabNavigator = () => {
 				name="Saved Recipies"
 				component={MyRecipies}
 				options={{
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="ios-home" color={color} size={size} />
+					tabBarIcon: ({ color }) => (
+						<Ionicons name="ios-bookmark" color={color} size={'20'} />
 					),
 				}}
 			/>
-			{/* <Tab.Screen name="add" component={MyRecipies} />
-			<Tab.Screen name="share" component={MyRecipies} /> */}
 		</Tab.Navigator>
 	)
 }
@@ -44,7 +47,18 @@ const MainStackNavigator = () => {
 	const isSignedIn = true
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
+			<Stack.Navigator
+				screenOptions={{
+					headerStyle: {
+						backgroundColor: theme.background,
+					},
+					headerTitle: 'shake N make',
+					headerTintColor: theme.focusText,
+					headerTitleStyle: {
+						fontWeight: 'bold',
+					},
+				}}
+			>
 				{isSignedIn ? (
 					<>
 						<Stack.Screen
@@ -62,33 +76,26 @@ const MainStackNavigator = () => {
 										/>
 									</TouchableOpacity>
 								),
-								headerTitle: 'shake N make',
-								headerRight: () => <Button title="Log Out" />,
+								headerRight: () => (
+									<Button title="Log Out" color={theme.focusText} />
+								),
 							})}
 						/>
 						<Stack.Screen
 							name="Profile"
 							component={Profile}
 							options={{
-								headerTitle: 'shake N make',
 								headerBackTitle: 'Back',
 							}}
 						/>
 					</>
 				) : (
 					<>
-						<Stack.Screen
-							name="Log In"
-							component={LogInScreen}
-							options={{
-								headerTitle: 'shake N make',
-							}}
-						/>
+						<Stack.Screen name="Log In" component={LogInScreen} />
 						<Stack.Screen
 							name="Sign Up"
 							component={SignUpScreen}
 							options={{
-								headerTitle: 'shake N make',
 								headerBackTitle: 'Log In',
 							}}
 						/>
