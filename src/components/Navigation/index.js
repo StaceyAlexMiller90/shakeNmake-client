@@ -5,11 +5,12 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Button, TouchableOpacity } from 'react-native'
-import FindRecipies from '../../screens/FindRecipies'
-import SavedRecipies from '../../screens/SavedRecipes'
+import FindRecipes from '../../screens/FindRecipes'
+import SavedRecipes from '../../screens/SavedRecipes'
 import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
 import Profile from '../../screens/Profile'
+import RecipesFound from '../../screens/RecipesFound'
 import colors from '../../styles'
 
 const Tab = createMaterialBottomTabNavigator()
@@ -23,8 +24,8 @@ const MainTabNavigator = () => {
 			inactiveColor={colors.unfocusedText}
 		>
 			<Tab.Screen
-				name="Find Recipies"
-				component={FindRecipies}
+				name="Find Recipes"
+				component={FindRecipes}
 				options={{
 					tabBarIcon: ({ color }) => (
 						<Ionicons name="ios-search" color={color} size={20} />
@@ -32,8 +33,8 @@ const MainTabNavigator = () => {
 				}}
 			/>
 			<Tab.Screen
-				name="Saved Recipies"
-				component={SavedRecipies}
+				name="Saved Recipes"
+				component={SavedRecipes}
 				options={{
 					tabBarIcon: ({ color }) => (
 						<Ionicons name="ios-bookmark" color={color} size={20} />
@@ -87,6 +88,13 @@ const MainStackNavigator = () => {
 							component={Profile}
 							options={{
 								headerBackTitle: 'Back',
+							}}
+						/>
+						<Stack.Screen
+							name="Recipes Found"
+							component={RecipesFound}
+							options={{
+								headerBackTitle: 'Search again',
 							}}
 						/>
 					</>

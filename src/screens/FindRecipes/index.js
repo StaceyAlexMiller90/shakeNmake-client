@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Text, View, Button, ActivityIndicator, Image } from 'react-native'
 import { Chip, TextInput } from 'react-native-paper'
 import { Accelerometer } from 'expo-sensors'
-import { fetchRecipies } from '../../store/recipies/actions'
+import { fetchRecipes } from '../../store/recipes/actions'
 
-const FindRecipies = () => {
+const FindRecipes = ({ navigation }) => {
 	const dispatch = useDispatch()
 	const [shaking, setShaking] = useState(false)
 	const [detectorOn, setDetectorOn] = useState(true)
@@ -23,15 +23,18 @@ const FindRecipies = () => {
 	}
 
 	useEffect(() => {
-		const available = Accelerometer.isAvailableAsync()
-		setDetectorOn(available)
+		const checkForAccelerometer = async () => {
+			const available = await Accelerometer.isAvailableAsync()
+			setDetectorOn(available)
+		}
+		checkForAccelerometer()
 
-		Accelerometer.setUpdateInterval(60)
+		Accelerometer.setUpdateInterval(500)
 
 		const subscription = Accelerometer.addListener((data) => {
 			const { x, y, z } = data
 			const acceleration = Math.sqrt(x * x + y * y + z * z)
-			const sensibility = 1.8
+			const sensibility = 1.7
 
 			if (acceleration >= sensibility) {
 				setShaking(true)
@@ -39,12 +42,14 @@ const FindRecipies = () => {
 				setShaking(false)
 			}
 		})
+
 		return () => subscription.remove()
 	}, [])
 
 	useEffect(() => {
 		if (shaking) {
-			dispatch(fetchRecipies())
+			dispatch(fetchRecipes(ingredientsList))
+			navigation.navigate('Recipes Found')
 		}
 	}, [shaking])
 
@@ -88,4 +93,4 @@ const FindRecipies = () => {
 	)
 }
 
-export default FindRecipies
+export default FindRecipes
