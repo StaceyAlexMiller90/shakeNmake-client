@@ -17,102 +17,102 @@ const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
 const MainTabNavigator = () => {
-	return (
-		<Tab.Navigator
-			barStyle={{ backgroundColor: colors.background }}
-			activeColor={colors.focusText}
-			inactiveColor={colors.unfocusedText}
-		>
-			<Tab.Screen
-				name="Find Recipes"
-				component={FindRecipes}
-				options={{
-					tabBarIcon: ({ color }) => (
-						<Ionicons name="ios-search" color={color} size={20} />
-					),
-				}}
-			/>
-			<Tab.Screen
-				name="Saved Recipes"
-				component={SavedRecipes}
-				options={{
-					tabBarIcon: ({ color }) => (
-						<Ionicons name="ios-bookmark" color={color} size={20} />
-					),
-				}}
-			/>
-		</Tab.Navigator>
-	)
+  return (
+    <Tab.Navigator
+      barStyle={{ backgroundColor: colors.background }}
+      activeColor={colors.focusText}
+      inactiveColor={colors.unfocusedText}
+    >
+      <Tab.Screen
+        name="Find Recipes"
+        component={FindRecipes}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-search" color={color} size={20} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Saved Recipes"
+        component={SavedRecipes}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="ios-bookmark" color={color} size={20} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  )
 }
 
 const MainStackNavigator = () => {
-	const isSignedIn = true
-	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: colors.background,
-					},
-					headerTitle: 'shake N make',
-					headerTintColor: colors.focusText,
-					headerTitleStyle: {
-						fontWeight: 'bold',
-					},
-				}}
-			>
-				{isSignedIn ? (
-					<>
-						<Stack.Screen
-							name="Home"
-							component={MainTabNavigator}
-							options={({ navigation }) => ({
-								headerLeft: () => (
-									<TouchableOpacity
-										onPress={() => navigation.navigate(Profile)}
-									>
-										<MaterialIcons
-											name="person-outline"
-											size={24}
-											color="black"
-										/>
-									</TouchableOpacity>
-								),
-								headerRight: () => (
-									<Button title="Log Out" color={colors.focusText} />
-								),
-							})}
-						/>
-						<Stack.Screen
-							name="Profile"
-							component={Profile}
-							options={{
-								headerBackTitle: 'Back',
-							}}
-						/>
-						<Stack.Screen
-							name="Recipes Found"
-							component={RecipesFound}
-							options={{
-								headerBackTitle: 'Search again',
-							}}
-						/>
-					</>
-				) : (
-					<>
-						<Stack.Screen name="Log In" component={LogInScreen} />
-						<Stack.Screen
-							name="Sign Up"
-							component={SignUpScreen}
-							options={{
-								headerBackTitle: 'Log In',
-							}}
-						/>
-					</>
-				)}
-			</Stack.Navigator>
-		</NavigationContainer>
-	)
+  const isSignedIn = true
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTitle: 'shake N make',
+          headerTintColor: colors.focusText,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        {isSignedIn ? (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={MainTabNavigator}
+              options={({ navigation }) => ({
+                headerLeft: () => (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate(Profile)}
+                  >
+                    <MaterialIcons
+                      name="person-outline"
+                      size={24}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                ),
+                headerRight: () => (
+                  <Button title="Log Out" color={colors.focusText} />
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={Profile}
+              options={{
+                headerBackTitle: 'Back',
+              }}
+            />
+            <Stack.Screen
+              name="Recipes Found"
+              component={RecipesFound}
+              options={{
+                headerBackTitle: 'Search again',
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="Log In" component={LogInScreen} />
+            <Stack.Screen
+              name="Sign Up"
+              component={SignUpScreen}
+              options={{
+                headerBackTitle: 'Log In',
+              }}
+            />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 export default MainStackNavigator

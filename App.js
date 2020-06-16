@@ -7,21 +7,21 @@ import MainStackNavigator from './src/components/Navigation'
 import colors from './src/styles'
 
 const theme = {
-	...DefaultTheme,
-	roundness: 2,
-	colors: {
-		...DefaultTheme.colors,
-		primary: colors.focusText,
-		accent: colors.background,
-	},
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: colors.focusText,
+    accent: colors.background,
+  },
 }
 
 export default function App() {
-	return (
-		<Provider store={store}>
-			<PaperProvider theme={theme}>
-				<MainStackNavigator />
-			</PaperProvider>
-		</Provider>
-	)
+  return (
+    <Provider store={store}>
+      <PaperProvider theme={theme}>
+        <MainStackNavigator />
+      </PaperProvider>
+    </Provider>
+  )
 }
