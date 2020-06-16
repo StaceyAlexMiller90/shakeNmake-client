@@ -1,7 +1,11 @@
-const colors = {
-  background: '#d2dae2',
-  focusText: '#1e272e',
-  unfocusedText: '#808e9b',
+import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/dev'
+
+export const colors = {
+  background: '#bbe6b5',
+  focusText: '#262730',
+  unfocusedText: '#BFBFBF',
 }
 
-export default colors
+export const fonts = {
+  headerFont: 'BebasNeue_400Regular',
+}

@@ -5,6 +5,7 @@ import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
 import { Text, View, ActivityIndicator, Image } from 'react-native'
 import MainStackNavigator from './src/components/Navigation'
 import colors from './src/styles'
+import { useFonts, BebasNeue_400Regular } from '@expo-google-fonts/dev'
 
 const theme = {
   ...DefaultTheme,

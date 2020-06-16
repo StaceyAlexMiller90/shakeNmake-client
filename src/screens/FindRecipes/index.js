@@ -4,6 +4,7 @@ import { Text, View, Button, ActivityIndicator, Image } from 'react-native'
 import { Chip, TextInput } from 'react-native-paper'
 import { Accelerometer } from 'expo-sensors'
 import { fetchRecipes } from '../../store/recipes/actions'
+import colors from '../../styles'
 
 const FindRecipes = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -13,8 +14,10 @@ const FindRecipes = ({ navigation }) => {
   const [ingredientsList, setIngredientsList] = useState([])
 
   const addItem = () => {
-    setIngredientsList([...ingredientsList, addedIngredient.trim()])
-    setAddedIngredient('')
+    if (addedIngredient.length) {
+      setIngredientsList([...ingredientsList, addedIngredient.trim()])
+      setAddedIngredient('')
+    }
   }
 
   const deleteItem = (ingToDelete) => {

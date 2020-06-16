@@ -36,11 +36,12 @@ const RecipesFound = () => {
                 <RecipeCard
                   image={item.recipe.image}
                   title={item.recipe.label}
-                  source={item.recipe.uri}
+                  id={item.recipe.uri.split('_')[1]}
                   healthlabels={item.recipe.healthlabels}
                   ingredients={item.recipe.ingredientLines}
                   cautions={item.recipe.cautions}
                   calories={item.recipe.calories}
+                  dietLabels={item.recipe.dietLabels}
                 />
               )
             }}

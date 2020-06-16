@@ -11,7 +11,7 @@ import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
 import Profile from '../../screens/Profile'
 import RecipesFound from '../../screens/RecipesFound'
-import colors from '../../styles'
+import { colors } from '../../styles'
 
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
