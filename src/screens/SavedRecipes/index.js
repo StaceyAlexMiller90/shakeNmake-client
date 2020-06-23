@@ -2,8 +2,8 @@ import React from 'react'
 import { View, ActivityIndicator, Image } from 'react-native'
 import HeaderText from '../../components/HeaderText'
 
-const SignUp = () => {
-  return <HeaderText size={30} text={'Sign In'} />
+const SavedRecipies = () => {
+  return <HeaderText text={'Saved Recipes'} />
 }
 
-export default SignUp
+export default SavedRecipies

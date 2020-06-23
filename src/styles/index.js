@@ -1,7 +1,12 @@
-const theme = {
-	background: '#d2dae2',
-	focusText: '#1e272e',
-	unfocusedText: '#808e9b',
+export const colors = {
+  background: '#FFFFFF',
+  popColor: '#feda84',
+  focusText: '#495141',
+  unfocusedText: '#B6B9B3',
 }
 
-export default theme
+export const fonts = {
+  header: 'BreeSerif_400Regular',
+  subHeader: 'Lora_700Bold',
+  body: 'Lora_400Regular',
+}
