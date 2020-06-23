@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, ActivityIndicator, Image } from 'react-native'
+import { View, ActivityIndicator, Image } from 'react-native'
+import HeaderText from '../../components/HeaderText'
 
 const SignUp = () => {
-  return <Text>Sign Up</Text>
+  return <HeaderText size={30} text={'Sign In'} />
 }
 
 export default SignUp

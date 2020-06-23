@@ -45,7 +45,8 @@ const RecipesFound = () => {
                 />
               )
             }}
-            keyExtractor={(item) => String(item.recipe.uri)}
+            listKey={'_' + Math.random().toString(36).substr(2, 9)}
+            keyExtractor={(item, index) => `${item} ${index.toString()}`}
           />
         </SafeAreaView>
       )}

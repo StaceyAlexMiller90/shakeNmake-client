@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, ActivityIndicator, Image } from 'react-native'
+import { View, ActivityIndicator, Image } from 'react-native'
+import HeaderText from '../../components/HeaderText'
 
 const Profile = () => {
-  return <Text>Me!</Text>
+  return <HeaderText text={'Me!'} />
 }
 
 export default Profile

@@ -2,17 +2,21 @@ import React from 'react'
 import { Text, View, ActivityIndicator, Image, FlatList } from 'react-native'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
+import BodyText from '../../components/BodyText'
+import PrimaryButton from '../PrimaryButton'
+import { fonts } from '../../styles'
 
 const RecipeCard = (props) => {
   return (
     <Card
+      titleStyle={{ fontFamily: fonts.header }}
       title={props.title.toUpperCase()}
       titleNumberOfLines={2}
       image={{ uri: props.image }}
       imageProps={{ resizeMode: 'center' }}
     >
-      <Text>{`${Math.round(props.calories)} cals`}</Text>
-      <Text>{`${props.ingredients.length} total ingredients`}</Text>
+      <BodyText text={`${Math.round(props.calories)} cals`} />
+      <BodyText text={`${props.ingredients.length} total ingredients`} />
       <FlatList
         data={props.dietLabels}
         numColumns={10}
@@ -25,20 +29,22 @@ const RecipeCard = (props) => {
               }}
             >
               <Ionicons name="md-checkmark" color={'green'} size={15} />
-              <Text style={{ size: 20 }}>{item}</Text>
+              <BodyText text={item} style={{ size: 20 }} />
             </View>
           )
         }}
-        listKey={(item) => String(item)}
+        listKey={'_' + Math.random().toString(36).substr(2, 9)}
+        keyExtractor={(item, index) => `${item} ${index.toString()}`}
       />
 
       <FlatList
         data={props.healthLabels}
         numColumns={10}
         renderItem={({ item }) => {
-          return <Text>{item}</Text>
+          return <BodyText text={item} />
         }}
-        listKey={(item) => String(item)}
+        listKey={'_' + Math.random().toString(36).substr(2, 9)}
+        keyExtractor={(item, index) => `${item} ${index.toString()}`}
       />
       <FlatList
         data={props.cautions}
@@ -47,11 +53,12 @@ const RecipeCard = (props) => {
           return (
             <>
               <Ionicons name="md-warning" color={'orange'} size={15} />
-              <Text style={{ marginRight: 5 }}>{item}</Text>
+              <BodyText text={item} style={{ marginRight: 5 }} />
             </>
           )
         }}
-        listKey={(item) => String(item)}
+        listKey={'_' + Math.random().toString(36).substr(2, 9)}
+        keyExtractor={(item, index) => `${item} ${index.toString()}`}
       />
       <View
         style={{
@@ -60,8 +67,8 @@ const RecipeCard = (props) => {
           justifyContent: 'center',
         }}
       >
-        <Button buttonStyle={{ margin: 10 }} title="View Details" />
-        <Button buttonStyle={{ margin: 10 }} title="Save this recipe" />
+        <PrimaryButton buttonStyle={{ margin: 10 }} title="View Details" />
+        <PrimaryButton buttonStyle={{ margin: 10 }} title="Save this recipe" />
       </View>
     </Card>
   )

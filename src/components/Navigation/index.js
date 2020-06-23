@@ -11,15 +11,22 @@ import LogInScreen from '../../screens/LogInScreen'
 import SignUpScreen from '../../screens/SignUpScreen'
 import Profile from '../../screens/Profile'
 import RecipesFound from '../../screens/RecipesFound'
-import { colors } from '../../styles'
+import { colors, fonts } from '../../styles'
+import SecondaryButton from '../../components/SecondaryButton'
 
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
+const signOut = () => {
+  console.log('Sign Out')
+}
+
 const MainTabNavigator = () => {
   return (
     <Tab.Navigator
-      barStyle={{ backgroundColor: colors.background }}
+      barStyle={{
+        backgroundColor: colors.background,
+      }}
       activeColor={colors.focusText}
       inactiveColor={colors.unfocusedText}
     >
@@ -45,19 +52,21 @@ const MainTabNavigator = () => {
   )
 }
 
-const MainStackNavigator = () => {
+const MainStackNavigator = (props) => {
   const isSignedIn = true
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={props.theme}>
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
             backgroundColor: colors.background,
           },
-          headerTitle: 'shake N make',
+          headerTitle: "Shake 'n Make",
           headerTintColor: colors.focusText,
           headerTitleStyle: {
             fontWeight: 'bold',
+            fontFamily: fonts.header,
+            fontSize: 25,
           },
         }}
       >
@@ -74,12 +83,12 @@ const MainStackNavigator = () => {
                     <MaterialIcons
                       name="person-outline"
                       size={24}
-                      color="black"
+                      color={colors.focusText}
                     />
                   </TouchableOpacity>
                 ),
                 headerRight: () => (
-                  <Button title="Log Out" color={colors.focusText} />
+                  <SecondaryButton title={'Log Out'} onPress={signOut} />
                 ),
               })}
             />

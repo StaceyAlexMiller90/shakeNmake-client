@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, ActivityIndicator, Image } from 'react-native'
+import { View, ActivityIndicator, Image } from 'react-native'
+import HeaderText from '../../components/HeaderText'
 
 const SavedRecipies = () => {
-  return <Text>Saved Recipies</Text>
+  return <HeaderText text={'Saved Recipes'} />
 }
 
 export default SavedRecipies

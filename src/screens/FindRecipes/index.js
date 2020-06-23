@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Text, View, Button, ActivityIndicator, Image } from 'react-native'
+import { View, Button, ActivityIndicator, Image } from 'react-native'
 import { Chip, TextInput } from 'react-native-paper'
 import { Accelerometer } from 'expo-sensors'
 import { fetchRecipes } from '../../store/recipes/actions'
-import colors from '../../styles'
+import HeaderText from '../../components/HeaderText'
+import PrimaryButton from '../../components/PrimaryButton'
+import SecondaryButton from '../../components/SecondaryButton'
 
 const FindRecipes = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -49,10 +51,14 @@ const FindRecipes = ({ navigation }) => {
     return () => subscription.remove()
   }, [])
 
+  const findRecipes = () => {
+    dispatch(fetchRecipes(ingredientsList))
+    navigation.navigate('Recipes Found')
+  }
+
   useEffect(() => {
     if (shaking) {
-      dispatch(fetchRecipes(ingredientsList))
-      navigation.navigate('Recipes Found')
+      findRecipes()
     }
   }, [shaking])
 
@@ -64,14 +70,16 @@ const FindRecipes = ({ navigation }) => {
         alignItems: 'center',
       }}
     >
-      <Text>Add your ingredients</Text>
+      <HeaderText size={20} text={'Add your ingredients'} />
       <TextInput
-        style={{ width: '80%' }}
+        style={{ width: '70%' }}
         mode="outlined"
         value={addedIngredient}
+        enablesReturnKeyAutomatically={true}
         onChangeText={(text) => setAddedIngredient(text)}
+        onSubmitEditing={addItem}
       />
-      <Button title="Add" onPress={addItem} />
+      <PrimaryButton title="Add" onPress={addItem} />
       <View
         style={{
           display: 'flex',
@@ -92,6 +100,12 @@ const FindRecipes = ({ navigation }) => {
           )
         })}
       </View>
+      <HeaderText size={20} text={'And then shake it!'} />
+      <SecondaryButton
+        size={15}
+        title="Find without shake"
+        onPress={findRecipes}
+      />
     </View>
   )
 }
